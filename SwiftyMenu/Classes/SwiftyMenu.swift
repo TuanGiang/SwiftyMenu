@@ -106,7 +106,7 @@ final public class SwiftyMenu: UIView {
    /// Determine title left inset for `SwiftyMenu` item.
     @IBInspectable public var textSize: Int = 15 {
         didSet {
-            selectButton.titleLabel?.font = UIFont.systemFont(ofSize: textSize)
+            selectButton.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat(textSize))
         }
     }
     
@@ -269,7 +269,7 @@ extension SwiftyMenu: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
             cell.textLabel?.text = items[indexPath.row].displayableValue
             cell.textLabel?.textColor = itemTextColor
-            cell.textLabel?.font = UIFont.systemFont(ofSize: textSize)
+            cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(textSize))
             cell.tintColor = itemTextColor
             cell.backgroundColor = rowBackgroundColor
             cell.accessoryType = selectedIndecis[indexPath.row] != nil ? .checkmark : .none
@@ -279,7 +279,7 @@ extension SwiftyMenu: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
             cell.textLabel?.text = items[indexPath.row].displayableValue
             cell.textLabel?.textColor = itemTextColor
-            cell.textLabel?.font = UIFont.systemFont(ofSize: textSize)
+            cell.textLabel?.font = UIFont.systemFont(ofSize: CGFloat(textSize))
             cell.tintColor = itemTextColor
             cell.backgroundColor = rowBackgroundColor
             cell.accessoryType = indexPath.row == selectedIndex ? .checkmark : .none
@@ -378,7 +378,7 @@ extension SwiftyMenu {
             selectButton.setTitle(placeHolderText, for: .normal)
             selectButton.layoutIfNeeded()
         }
-        selectButton.titleLabel?.font = UIFont.systemFont(ofSize: textSize)
+        selectButton.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat(textSize))
         if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
             selectButton.imageEdgeInsets.right = width - 16
             selectButton.titleEdgeInsets.left = 32
