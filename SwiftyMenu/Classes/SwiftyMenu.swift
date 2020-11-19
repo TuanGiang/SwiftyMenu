@@ -304,7 +304,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 setSelectedOptionsAsTitle()
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                    collapseSwiftyMenuAndToggle()
                 }
             } else {
                 selectedIndecis[indexPath.row] = indexPath.row
@@ -314,13 +314,13 @@ extension SwiftyMenu: UITableViewDelegate {
                 self.didSelectItem(self, selectedText, indexPath.row)
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                    collapseSwiftyMenuAndToggle()
                 }
             }
         } else {
             if selectedIndex == indexPath.row {
                 if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                    collapseSwiftyMenuAndToggle()
                 }
             } else {
                 selectedIndex = indexPath.row
@@ -330,7 +330,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 self.didSelectItem(self, selectedText, indexPath.row)
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                    collapseSwiftyMenuAndToggle()
                 }
             }
         }
@@ -523,10 +523,14 @@ extension SwiftyMenu {
                            completion: expandingAnimationCompletionBlock)
         }
     }
-    
+    private func collapseSwiftyMenuAndToggle(){
+        collapseSwiftyMenu()
+        state.toggle()
+    }
     /// Called to Collapse `SwiftyMenu`.
     private func collapseSwiftyMenu() {
         delegate?.swiftyMenu(willCollapse: self)
+        
         self.willCollapse()
         heightConstraint.constant = CGFloat(rowHeight)
         
@@ -549,6 +553,8 @@ extension SwiftyMenu {
                            animations: animationBlock,
                            completion: collapsingAnimationCompletionBlock)
         }
+        
+        
     }
 }
 
